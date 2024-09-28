@@ -1,6 +1,5 @@
-import 'package:blank/screen/add_post_screen.dart';
-import 'package:blank/screen/main_screen.dart';
-import 'package:blank/screen/tabs.dart';
+import 'package:blank/providers/kakao_login_provider.dart';
+import 'package:blank/service/firestore_service.dart';
 import 'package:blank/widget/kakao_login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -11,6 +10,17 @@ class LoginScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final loginStatus = ref.watch(kakaoLoginProvider);
+
+    // 로그인 상태에 따라 동작
+    if (loginStatus) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        // 로그인 성공 시 홈 페이지로 이동
+        FirestoreService fs = FirestoreService();
+        fs.checkUserAndNavigate(context);
+      });
+    }
+
     return Scaffold(
       body: SafeArea(
         child: SizedBox(
@@ -37,7 +47,6 @@ class LoginScreen extends ConsumerWidget {
                           fontSize: 32,
                           fontFamily: 'Pretendard',
                           fontVariations: [FontVariation('wght', 700)],
-                          // fontWeight: FontWeight.w700,
                           letterSpacing: -0.96,
                         ),
                       ),
@@ -45,9 +54,7 @@ class LoginScreen extends ConsumerWidget {
                   ],
                 ),
               ),
-              const KakaoLogin(
-                mainScreen: TabsScreen(),
-              ),
+              const KakaoLogin(),
             ],
           ),
         ),

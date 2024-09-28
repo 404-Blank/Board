@@ -1,0 +1,21 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "27X8924SNC.com.622.blank",
+        "components": [
+          {
+            "/": "/*",
+            "comment": "Matches any path"
+          }
+        ]
+      }
+    ]
+  },
+  "webcredentials": {
+    "apps": [
+      "27X8924SNC.com.622.blank"
+    ]
+  }
+}

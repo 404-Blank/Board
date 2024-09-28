@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>FlutterDeepLinkingEnabled</key>
+	<true/>
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
 	<key>CFBundleDevelopmentRegion</key>
@@ -22,17 +24,6 @@
 	<string>$(FLUTTER_BUILD_NAME)</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
-	<key>CFBundleURLTypes</key>
-	<array>
-		<dict>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>kakaocd0a89a8107e5e79bb0ff4f9df8d4de2</string>
-			</array>
-		</dict>
-	</array>
 	<key>CFBundleVersion</key>
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>LSApplicationQueriesSchemes</key>
@@ -60,5 +51,38 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>사진 앨범에 접근하기 위해 필요한 권한입니다.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>카메라에 접근하기 위해 필요한 권한입니다.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>비디오 녹화를 위해 마이크에 접근할 수 있는 권한이 필요합니다.</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>kakaocd0a89a8107e5e79bb0ff4f9df8d4de2</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>com.622.blank</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>blank</string>
+			</array>
+		</dict>
+	</array>
+	<key>NSUserActivityTypes</key>
+	<array>
+		<string>NSUserActivityTypeBrowsingWeb</string>
+	</array>
+    <key>com.apple.developer.associated-domains</key>
+    <array>
+      <string>applinks:blank-a20ed.firebaseapp.com</string>
+    </array>
 </dict>
 </plist>

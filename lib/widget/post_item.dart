@@ -1,9 +1,6 @@
 import 'package:blank/Model/post.dart';
-import 'package:blank/util/time_calculate.dart';
 import 'package:blank/widget/likes_comment.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-
 class PostItem extends StatelessWidget {
   const PostItem({super.key, required this.post, required this.onTap});
 
@@ -33,7 +30,7 @@ class PostItem extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Row(
+                      const Row(
                         children: [
                           // for (int i = 0; i < post.categories.length; i++) ...[
                           //   Container(
@@ -49,13 +46,13 @@ class PostItem extends StatelessWidget {
                           //   ),
                           //   const SizedBox(width: 16),
                           // ],
-                          Text(post.category,
-                              style: GoogleFonts.inter(
-                                  textStyle: const TextStyle(
-                                color: Color(0xFF1C1B1F),
-                                fontSize: 10,
-                                fontWeight: FontWeight.w600,
-                              )))
+                          // Text(post.,
+                          //     style: GoogleFonts.inter(
+                          //         textStyle: const TextStyle(
+                          //       color: Color(0xFF1C1B1F),
+                          //       fontSize: 10,
+                          //       fontWeight: FontWeight.w600,
+                          //     )))
                         ],
                       ),
                       const SizedBox(
@@ -90,7 +87,7 @@ class PostItem extends StatelessWidget {
                       Row(
                         children: [
                           Text(
-                            post.author,
+                            post.authorId,
                             style: commonTextStyle,
                           ),
                           const Padding(
@@ -102,7 +99,7 @@ class PostItem extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            TimeCalculate.timeAgo(post.createdAt),
+                            post.createdAt.toIso8601String(),
                             style: commonTextStyle,
                           ),
                           const Padding(
@@ -114,7 +111,7 @@ class PostItem extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            '조회수 ${post.views}',
+                            '조회수 ${post.viewsCount}',
                             style: commonTextStyle,
                           ),
                         ],
@@ -151,7 +148,7 @@ class PostItem extends StatelessWidget {
                     ),
                     LikesComment(
                       comments: post.commentCount,
-                      likes: post.likes,
+                      likes: post.likesCount,
                     )
                   ],
                 ),

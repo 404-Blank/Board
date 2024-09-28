@@ -1,55 +1,54 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class Post {
-  String id;
-  String author;
-  String category;
-  String title;
-  String content;
-  int createdAt;
-  int views;
-  int likes;
-  int commentCount; // 댓글 수 추가
+  final String postId;
+  final String groupId;
+  final String authorId; // 작성자 UID
+  final String title;
+  final String content;
+  final DateTime createdAt;
+  final int likesCount;
+  final int viewsCount;
+  final int commentCount;
 
   Post({
-    required this.id,
-    required this.author,
-    required this.category,
+    required this.postId,
+    required this.groupId,
+    required this.authorId,
     required this.title,
     required this.content,
     required this.createdAt,
-    this.views = 0,
-    this.likes = 0,
-    this.commentCount = 0, // 기본값 0
+    required this.likesCount,
+    required this.viewsCount,
+    required this.commentCount,
   });
 
-  Map<String, dynamic> toMap() {
-    return {
-      'author': author,
-      'category': category,
-      'title': title,
-      'content': content,
-      'created_at': createdAt,
-      'views': views,
-      'likes': likes,
-      'comment_count': commentCount, // 댓글 수 저장
-    };
-  }
-
-  static Post fromMap(String id, Map<String, dynamic> map) {
+  // Firestore 데이터를 Post 객체로 변환
+  factory Post.fromFirestore(Map<String, dynamic> data, String id) {
     return Post(
-      id: id,
-      author: map['author'],
-      category: map['category'],
-      title: map['title'],
-      content: map['content'],
-      createdAt: map['created_at'],
-      views: map['views'],
-      likes: map['likes'],
-      commentCount: map['comment_count'] ?? 0, // 댓글 수 로드
+      postId: id,
+      groupId: data['groupId'] ?? '',
+      authorId: data['authorId'] ?? '',
+      title: data['title'] ?? '',
+      content: data['content'] ?? '',
+      createdAt: (data['createdAt'] as Timestamp).toDate(),
+      likesCount: data['likesCount'] ?? 0,
+      viewsCount: data['viewsCount'] ?? 0,
+      commentCount: data['commentCount'] ?? 0,
     );
   }
 
-  String get formattedCreatedAt {
-    final date = DateTime.fromMillisecondsSinceEpoch(createdAt);
-    return "${date.year}-${date.month}-${date.day} ${date.hour}:${date.minute}";
+  // Post 객체를 Firestore로 변환
+  Map<String, dynamic> toFirestore() {
+    return {
+      'groupId': groupId,
+      'authorId': authorId,
+      'title': title,
+      'content': content,
+      'createdAt': Timestamp.fromDate(createdAt),
+      'likesCount': likesCount,
+      'viewsCount': viewsCount,
+      'commentCount': commentCount,
+    };
   }
 }

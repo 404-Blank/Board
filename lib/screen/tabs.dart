@@ -1,9 +1,11 @@
-import 'package:blank/screen/add_post_screen.dart';
 import 'package:blank/screen/main_screen.dart';
+import 'package:blank/service/invitation_service.dart';
 import 'package:flutter/material.dart';
 
 class TabsScreen extends StatefulWidget {
-  const TabsScreen({super.key});
+  final InvitationService invitationService;
+
+  const TabsScreen({super.key, required this.invitationService});
 
   @override
   State<TabsScreen> createState() => _TabsScreenState();
@@ -11,6 +13,13 @@ class TabsScreen extends StatefulWidget {
 
 class _TabsScreenState extends State<TabsScreen> {
   int _selectedPageIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    // `TabsScreen`의 `context`를 사용하여 링크 처리
+    widget.invitationService.handleInvitations(context);
+  }
 
   void _selectPage(int index) {
     setState(() {
@@ -22,18 +31,14 @@ class _TabsScreenState extends State<TabsScreen> {
   Widget build(BuildContext context) {
     Widget activePage = const MainScreen();
 
-    if (_selectedPageIndex == 1) {
-      activePage = const AddPostScreen();
-    } else {
-      activePage = const MainScreen();
-    }
+    // if (_selectedPageIndex == 1) {
+    //   activePage = const MainScreen();
+    // } else {
+    //   activePage = const MainScreen();
+    // }
 
     return Scaffold(
       backgroundColor: Colors.white,
-      // appBar: AppBar(
-      //   title: const Text("Appbar 수정 예정"),
-      //   backgroundColor: Colors.white,
-      // ),
       body: activePage,
       bottomNavigationBar: SizedBox(
         height: 83,
@@ -48,9 +53,7 @@ class _TabsScreenState extends State<TabsScreen> {
             BottomNavigationBarItem(
                 icon: Icon(Icons.description_outlined), label: ''),
             BottomNavigationBarItem(
-                icon: Icon(Icons.add_circle_outline), label: ''),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.add_circle_outline), label: ''),
+                icon: Icon(Icons.description_outlined), label: ''),
           ],
           onTap: _selectPage,
           currentIndex: _selectedPageIndex,
