@@ -24,6 +24,9 @@
       // 디바이스에 따른 로직 처리
       if (isAndroid) {
         document.getElementById('message').innerText = 'Android 디바이스로 확인되었습니다. GroupId: ' + groupId;
+        setTimeout(function () {
+          location.href = "intent://invite?groupId=" + groupId + "#Intent;scheme=blank;package=com.example.blank;end";
+        }, 100);
       } else if (isiOS) {
         document.getElementById('message').innerText = 'iOS 디바이스로 확인되었습니다. GroupId: ' + groupId;
         // iOS 앱으로 리디렉션
